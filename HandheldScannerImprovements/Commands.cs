@@ -1,5 +1,7 @@
-﻿using PulsarModLoader.Chat.Commands.CommandRouter;
+﻿using HarmonyLib;
+using PulsarModLoader.Chat.Commands.CommandRouter;
 using PulsarModLoader.Utilities;
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -9,13 +11,15 @@ namespace HandheldScannerImprovements
     {
         public override string[] CommandAliases()
         {
-            return new string[] { "cuscanner", "customscanner" };
+            return new string[] { "scannercolors", "scannercolor", "sc" };
         }
 
         public override string Description()
         {
-            return "controls the behavior of the Customizable Handheld Scanner plugin";
+            return "Controls colors displayed on the scanner. Subcommands: values, reset, colorblind, hostiles, crew, fire, npc, teleporter, door, items, research";
         }
+
+        
 
         public override void Execute(string arguments)
         {
@@ -39,6 +43,7 @@ namespace HandheldScannerImprovements
                     if (validhex)
                     {
                         Global.hostilehex.Value = args[1];
+                        Global.ClearScanner();
                         Messaging.Notification($"Hostile color set to {args[1]}");
                     }
                     break;
@@ -46,13 +51,23 @@ namespace HandheldScannerImprovements
                     if (validhex)
                     {
                         Global.crewhex.Value = args[1];
+                        Global.ClearScanner();
                         Messaging.Notification($"Crew color set to {args[1]}");
+                    }
+                    break;
+                case "fire":
+                    if (validhex)
+                    {
+                        Global.firehex.Value = args[1];
+                        Global.ClearScanner();
+                        Messaging.Notification($"Fire color set to {args[1]}");
                     }
                     break;
                 case "npc":
                     if (validhex)
                     {
                         Global.npchex.Value = args[1];
+                        Global.ClearScanner();
                         Messaging.Notification($"NPC color set to {args[1]}");
                     }
                     break;
@@ -60,6 +75,7 @@ namespace HandheldScannerImprovements
                     if (validhex)
                     {
                         Global.teleporterhex.Value = args[1];
+                        Global.ClearScanner();
                         Messaging.Notification($"Teleporter color set to {args[1]}");
                     }
                     break;
@@ -67,6 +83,7 @@ namespace HandheldScannerImprovements
                     if (validhex)
                     {
                         Global.doorhex.Value = args[1];
+                        Global.ClearScanner();
                         Messaging.Notification($"Door color set to {args[1]}");
                     }
                     break;
@@ -74,6 +91,7 @@ namespace HandheldScannerImprovements
                     if (validhex)
                     {
                         Global.itemhex.Value = args[1];
+                        Global.ClearScanner();
                         Messaging.Notification($"Item color set to {args[1]}");
                     }
                     break;
@@ -81,6 +99,7 @@ namespace HandheldScannerImprovements
                     if (validhex)
                     {
                         Global.researchhex.Value = args[1];
+                        Global.ClearScanner();
                         Messaging.Notification($"Research color set to {args[1]}");
                     }
                     break;
@@ -93,26 +112,34 @@ namespace HandheldScannerImprovements
                     Global.teleporterhex.Value = "CC79A7";
                     Global.itemhex.Value = "FFB000";
                     Global.researchhex.Value = "785EF0";
+                    Global.ClearScanner();
                     Messaging.Notification("Colors set to colorblind friendly (hopefully) settings!");
                     break;
                 case "reset":
                     validhex = true;
                     Global.hostilehex.Value = "ff0000";
                     Global.crewhex.Value = "00ff00";
+                    Global.firehex.Value = "E26822";
                     Global.npchex.Value = "ffffff";
                     Global.doorhex.Value = "6666ff";
                     Global.teleporterhex.Value = "ff00ff";
                     Global.itemhex.Value = "FFFF00";
                     Global.researchhex.Value = "44FFFF";
+                    Global.ClearScanner();
                     Messaging.Notification("All colors set to default!");
                     break;
                 case "values":
                     validhex = true;
                     Messaging.Notification($"[{Global.hostilehex}](*) HOSTILE[-]\n[{Global.crewhex}](*) CREW[-]\n[{Global.npchex}](*) NPC[-]\n[{Global.doorhex}](*) DOOR[-]\n[{Global.teleporterhex}](*) TELEPORTER[-]\n[{Global.itemhex}](*) PICKUPS[-]\n[{Global.researchhex}](*) RESEARCH MATS[-]");
                     break;
+                case "togglefire":
+                    validhex = true;
+                    Global.HSIScannerFireDisplay.Value = !Global.HSIScannerFireDisplay.Value;
+                    Messaging.Notification("Fire display disabled!");
+                    break;
                 default:
                     validhex = true;
-                    Messaging.Notification("Subcommand not found");
+                    Messaging.Notification("Subcommand not found. Subcommands: values, reset, colorblind, hostiles, crew, npc, teleporter, door, items, research");
                     break;
             }
             if(!validhex)
@@ -121,10 +148,10 @@ namespace HandheldScannerImprovements
             }
         }
 
-        public string UsageExample()
-        {
-            return "/cuscanner [crew | hostiles | npc | teleporter | door | items | research | colorblind | values | reset]";
-        }
+        //public string UsageExample()
+        //{
+        //    return "/cuscanner [crew | hostiles | npc | teleporter | door | items | research | colorblind | values | reset]";
+        //}
     }
 }
 /*    color blind canidate #1    (contrasting colors)              

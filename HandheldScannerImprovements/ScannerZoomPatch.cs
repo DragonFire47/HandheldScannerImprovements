@@ -1,8 +1,7 @@
 ﻿using HarmonyLib;
 using System.Collections.Generic;
-using static PulsarModLoader.Patches.HarmonyHelpers;
 using System.Reflection.Emit;
-using ProFlares;
+using static PulsarModLoader.Patches.HarmonyHelpers;
 
 namespace HandheldScannerImprovements
 {
@@ -23,15 +22,19 @@ namespace HandheldScannerImprovements
     {
         static float PatchMethod(float zoomLevel)
         {
-            //Zoom      1,2,3,        1,2,3,4.0,5.0
-            //vanilla = 1,2,3. Goal = 3,2,1,0.8,0.6,etc
-            if (zoomLevel < 3f)
+            //Zoom      1,2,3,           1,2,3,4,5
+            //vanilla = 1,2,3. Current = ???
+            //Equations:
+            //Vanilla.... Zoom = 5 - zoomLevel
+            //Current.... Zoom = 1.8 - ((zoomLevel - 4) * .15)
+            //Potential.. Zoom = 7 / zoomLevel *.7
+            if (zoomLevel < 4f)
             {
                 return 5f - zoomLevel;
             }
             else
             {
-                return 2f - ((zoomLevel - 4f) * .2f);
+                return 1.8f - ((zoomLevel - 4f) * .15f);
             }
         }
         static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)

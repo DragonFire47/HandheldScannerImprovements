@@ -33,7 +33,7 @@ namespace HandheldScannerImprovements
                 };
                 InjectedSequence = new List<CodeInstruction>()
                 {
-                    new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(Global),"ItemKey")),
+                    new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(Global), "ItemKey")),
                 };
                 instructions = HarmonyHelpers.PatchBySequence(instructions, TargetSequence, InjectedSequence, HarmonyHelpers.PatchMode.REPLACE);
 
@@ -44,7 +44,7 @@ namespace HandheldScannerImprovements
                 };
                 InjectedSequence = new List<CodeInstruction>()
                 {
-                    new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(Global),"ResearchKey")),
+                    new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(Global), "ResearchKey")),
                 };
                 instructions = HarmonyHelpers.PatchBySequence(instructions, TargetSequence, InjectedSequence, HarmonyHelpers.PatchMode.REPLACE);
 
@@ -58,7 +58,7 @@ namespace HandheldScannerImprovements
                 };
                 InjectedSequence = new List<CodeInstruction>()
                 {
-                    new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(Global),"teleporterrgb")),
+                    new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(Global), "teleporterrgb")),
                 };
                 instructions = HarmonyHelpers.PatchBySequence(instructions, TargetSequence, InjectedSequence, HarmonyHelpers.PatchMode.REPLACE, HarmonyHelpers.CheckMode.NONNULL);
 
@@ -69,7 +69,7 @@ namespace HandheldScannerImprovements
                 };
                 InjectedSequence = new List<CodeInstruction>()
                 {
-                    new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(Global),"crewrgb")),
+                    new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(Global), "crewrgb")),
                 };
                 instructions = HarmonyHelpers.PatchBySequence(instructions, TargetSequence, InjectedSequence, HarmonyHelpers.PatchMode.REPLACE);
 
@@ -80,7 +80,7 @@ namespace HandheldScannerImprovements
                 };
                 InjectedSequence = new List<CodeInstruction>()
                 {
-                    new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(Global),"hostilergb")),
+                    new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(Global), "hostilergb")),
                 };
                 instructions = HarmonyHelpers.PatchBySequence(instructions, TargetSequence, InjectedSequence, HarmonyHelpers.PatchMode.REPLACE);
 
@@ -91,7 +91,7 @@ namespace HandheldScannerImprovements
                 };
                 InjectedSequence = new List<CodeInstruction>()
                 {
-                    new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(Global),"hostilergb")),
+                    new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(Global), "hostilergb")),
                 };
                 instructions = HarmonyHelpers.PatchBySequence(instructions, TargetSequence, InjectedSequence, HarmonyHelpers.PatchMode.REPLACE);
 
@@ -102,7 +102,7 @@ namespace HandheldScannerImprovements
                 };
                 InjectedSequence = new List<CodeInstruction>()
                 {
-                    new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(Global),"itemrgb")),
+                    new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(Global), "itemrgb")),
                 };
                 instructions = HarmonyHelpers.PatchBySequence(instructions, TargetSequence, InjectedSequence, HarmonyHelpers.PatchMode.REPLACE);
 
@@ -113,7 +113,7 @@ namespace HandheldScannerImprovements
                 };
                 InjectedSequence = new List<CodeInstruction>()
                 {
-                    new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(Global),"itemrgb")),
+                    new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(Global), "itemrgb")),
                 };
                 instructions = HarmonyHelpers.PatchBySequence(instructions, TargetSequence, InjectedSequence, HarmonyHelpers.PatchMode.REPLACE);
 
@@ -124,7 +124,7 @@ namespace HandheldScannerImprovements
                 };
                 InjectedSequence = new List<CodeInstruction>()
                 {
-                    new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(Global),"itemrgb")),
+                    new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(Global), "itemrgb")),
                 };
                 instructions = HarmonyHelpers.PatchBySequence(instructions, TargetSequence, InjectedSequence, HarmonyHelpers.PatchMode.REPLACE);
 
@@ -138,7 +138,7 @@ namespace HandheldScannerImprovements
                 };
                 InjectedSequence = new List<CodeInstruction>()
                 {
-                    new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(Global),"researchrgb")),
+                    new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(Global), "researchrgb")),
                 };
                 instructions = HarmonyHelpers.PatchBySequence(instructions, TargetSequence, InjectedSequence, HarmonyHelpers.PatchMode.REPLACE, HarmonyHelpers.CheckMode.NONNULL);
 
@@ -149,7 +149,7 @@ namespace HandheldScannerImprovements
                 };
                 InjectedSequence = new List<CodeInstruction>()
                 {
-                    new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(Global),"doorrgb")),
+                    new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(Global), "doorrgb")),
                 };
                 instructions = HarmonyHelpers.PatchBySequence(instructions, TargetSequence, InjectedSequence, HarmonyHelpers.PatchMode.REPLACE);
 
@@ -160,7 +160,7 @@ namespace HandheldScannerImprovements
                 };
                 InjectedSequence = new List<CodeInstruction>()
                 {
-                    new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(Global),"npcrgb")),
+                    new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(Global), "npcrgb")),
                 };
                 return HarmonyHelpers.PatchBySequence(instructions, TargetSequence, InjectedSequence, HarmonyHelpers.PatchMode.REPLACE, HarmonyHelpers.CheckMode.NONNULL);
             }

@@ -23,32 +23,36 @@ namespace HandheldScannerImprovements
             {
                 return;
             }
-            foreach (PLShipInfo currentShip in PLEncounterManager.Instance.AllShips.Values)
+            foreach (PLShipInfoBase currentShip in PLEncounterManager.Instance.AllShips.Values)
             {
-                foreach (PLFire CurrentFire in currentShip.AllFires.Values)
+                if (currentShip is PLShipInfo)
                 {
-                    if (CurrentFire != null && CheckIfValid(CurrentFire) && !(bool)IDTMethod.Invoke(PLScanner.Instance, new object[] { CurrentFire.transform }))
+                    PLShipInfo ship = (PLShipInfo)currentShip;
+                    foreach (PLFire CurrentFire in ship.AllFires.Values)
                     {
-                        PLScanner.TargetScannerInfo targetScannerInfo_Fire = (PLScanner.TargetScannerInfo)AccessTools.Constructor(typeof(PLScanner.TargetScannerInfo)).Invoke(new object[] { });
-                        GameObject gameObject = UnityEngine.Object.Instantiate<GameObject>(PLScanner.Instance.Target_Scanner_Prefab);
-                        gameObject.transform.parent = PLScanner.Instance.RadarBG.transform;
-                        gameObject.transform.localPosition = Vector3.zero;
-                        gameObject.transform.localRotation = Quaternion.identity;
-                        gameObject.transform.localScale = Vector3.one;
-                        //targetScannerInfo_Fire.MyFire = CurrentFire;
-                        targetScannerInfo_Fire.Texture = gameObject.GetComponent<UITexture>();
-                        foreach (object obj in targetScannerInfo_Fire.Texture.transform)
+                        if (CurrentFire != null && CheckIfValid(CurrentFire) && !(bool)IDTMethod.Invoke(PLScanner.Instance, new object[] { CurrentFire.transform }))
                         {
-                            UITexture component = ((Transform)obj).GetComponent<UITexture>();
-                            if (component != null)
+                            PLScanner.TargetScannerInfo targetScannerInfo_Fire = (PLScanner.TargetScannerInfo)AccessTools.Constructor(typeof(PLScanner.TargetScannerInfo)).Invoke(new object[] { });
+                            GameObject gameObject = UnityEngine.Object.Instantiate<GameObject>(PLScanner.Instance.Target_Scanner_Prefab);
+                            gameObject.transform.parent = PLScanner.Instance.RadarBG.transform;
+                            gameObject.transform.localPosition = Vector3.zero;
+                            gameObject.transform.localRotation = Quaternion.identity;
+                            gameObject.transform.localScale = Vector3.one;
+                            //targetScannerInfo_Fire.MyFire = CurrentFire;
+                            targetScannerInfo_Fire.Texture = gameObject.GetComponent<UITexture>();
+                            foreach (object obj in targetScannerInfo_Fire.Texture.transform)
                             {
-                                targetScannerInfo_Fire.TextureBG = component;
-                                break;
+                                UITexture component = ((Transform)obj).GetComponent<UITexture>();
+                                if (component != null)
+                                {
+                                    targetScannerInfo_Fire.TextureBG = component;
+                                    break;
+                                }
                             }
+                            targetScannerInfo_Fire.Transform = CurrentFire.transform;
+                            targetScannerInfo_Fire.Color = NGUIText.ParseColor24(Global.firehex.Value, 0);
+                            ((List<PLScanner.TargetScannerInfo>)AllTargetScannerInfos.GetValue(PLScanner.Instance)).Add(targetScannerInfo_Fire);
                         }
-                        targetScannerInfo_Fire.Transform = CurrentFire.transform;
-                        targetScannerInfo_Fire.Color = NGUIText.ParseColor24(Global.firehex.Value, 0);
-                        ((List<PLScanner.TargetScannerInfo>)AllTargetScannerInfos.GetValue(PLScanner.Instance)).Add(targetScannerInfo_Fire);
                     }
                 }
             }

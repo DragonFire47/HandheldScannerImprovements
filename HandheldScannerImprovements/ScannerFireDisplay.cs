@@ -38,7 +38,6 @@ namespace HandheldScannerImprovements
                             gameObject.transform.localPosition = Vector3.zero;
                             gameObject.transform.localRotation = Quaternion.identity;
                             gameObject.transform.localScale = Vector3.one;
-                            //targetScannerInfo_Fire.MyFire = CurrentFire;
                             targetScannerInfo_Fire.Texture = gameObject.GetComponent<UITexture>();
                             foreach (object obj in targetScannerInfo_Fire.Texture.transform)
                             {
@@ -70,20 +69,4 @@ namespace HandheldScannerImprovements
             return HarmonyHelpers.PatchBySequence(instructions, TargetSequence, InjectedSequence, HarmonyHelpers.PatchMode.AFTER, HarmonyHelpers.CheckMode.NONNULL);
         }
     }
-    /*class TargetScannerInfo_Fire : PLScanner.TargetScannerInfo
-    {
-        public static bool CheckIfValid(PLFire inFire)
-        {
-            return inFire != null && inFire.MyShip != null && inFire.MyShip.MyTLI != null && PLNetworkManager.Instance.ViewedPawn != null && inFire.MyShip.MyTLI == PLNetworkManager.Instance.ViewedPawn.MyCurrentTLI;
-        }
-        public override bool IsStillValid()
-        {
-            return CheckIfValid(MyFire);
-        }
-        public PLFire MyFire;
-
-        public TargetScannerInfo_Fire()
-        {
-        }
-    }*/
 }

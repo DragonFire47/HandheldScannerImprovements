@@ -10,6 +10,7 @@ namespace HandheldScannerImprovements
         public static SaveValue<bool> HSIShowScanner = new SaveValue<bool>("HSIShowScanner", true);
         public static SaveValue<bool> HSIScannerEquipReq = new SaveValue<bool>("HSIScannerEquipReq", false);
         public static SaveValue<bool> HSIScannerFireDisplay = new SaveValue<bool>("HSIScannerFire", true);
+        public static SaveValue<int> HSIUIZoomLevel = new SaveValue<int>("HSIZoomLevel", 1);
 
 
         public static SaveValue<string> hostilehex = new SaveValue<string>("HostileHex", "ff0000");

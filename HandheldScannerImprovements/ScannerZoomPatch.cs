@@ -1,10 +1,13 @@
 ﻿using HarmonyLib;
+using PulsarModLoader;
 using System.Collections.Generic;
 using System.Reflection.Emit;
 using static PulsarModLoader.Patches.HarmonyHelpers;
 
 namespace HandheldScannerImprovements
 {
+
+    //Correct scanner max zoom based on level.
     [HarmonyPatch(typeof(PLPawnItem_Scanner), "OnActive")]
     internal class ScannerMaxZoomPatch
     {
@@ -39,6 +42,9 @@ namespace HandheldScannerImprovements
         }
         static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
         {
+
+
+            //Implement Scanner Zoom recalculations from patch method.
             List<CodeInstruction> targetSequence = new List<CodeInstruction>()
             {
                 new CodeInstruction(OpCodes.Conv_R4),
@@ -50,7 +56,6 @@ namespace HandheldScannerImprovements
 
             instructions = PatchBySequence(instructions, targetSequence, InjectedSequence, PatchMode.AFTER, CheckMode.NONNULL);
 
-
             targetSequence = new List<CodeInstruction>()
             {
                 new CodeInstruction(OpCodes.Ldloc_S),
@@ -59,6 +64,24 @@ namespace HandheldScannerImprovements
                 new CodeInstruction(OpCodes.Add),
                 new CodeInstruction(OpCodes.Conv_R4),
             };
+
+            instructions = PatchBySequence(instructions, targetSequence, InjectedSequence, PatchMode.AFTER, CheckMode.NONNULL);
+
+
+
+            //Correct Scanner UI zoom to global value.
+            targetSequence = new List<CodeInstruction>()
+            {
+                new CodeInstruction(OpCodes.Ldc_I4_3),
+                new CodeInstruction(OpCodes.Stloc_1),
+            };
+            InjectedSequence = new List<CodeInstruction>()
+            {
+                new CodeInstruction(OpCodes.Ldsfld, AccessTools.Field(typeof(Global), "HSIUIZoomLevel")),
+                new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(SaveValue<int>), "get_Value")),
+                new CodeInstruction(OpCodes.Stloc_1),
+            };
+            
             return PatchBySequence(instructions, targetSequence, InjectedSequence, PatchMode.AFTER, CheckMode.NONNULL);
         }
     }

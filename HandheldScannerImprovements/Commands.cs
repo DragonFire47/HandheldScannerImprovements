@@ -1,7 +1,5 @@
-﻿using HarmonyLib;
-using PulsarModLoader.Chat.Commands.CommandRouter;
+﻿using PulsarModLoader.Chat.Commands.CommandRouter;
 using PulsarModLoader.Utilities;
-using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -136,6 +134,18 @@ namespace HandheldScannerImprovements
                     validhex = true;
                     Global.HSIScannerFireDisplay.Value = !Global.HSIScannerFireDisplay.Value;
                     Messaging.Notification("Fire display disabled!");
+                    break;
+                case "zoomlevel":
+                    validhex = true;
+                    if (int.TryParse(args[1], out int zoomlevel))
+                    {
+                        Global.HSIUIZoomLevel.Value = zoomlevel;
+                        Messaging.Notification("UIZoom level set to " + zoomlevel);
+                    }
+                    else
+                    {
+                        Messaging.Notification("Input value could not be parsed. Please use a number.");
+                    }
                     break;
                 default:
                     validhex = true;

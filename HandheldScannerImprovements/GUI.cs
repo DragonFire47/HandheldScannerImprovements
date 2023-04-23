@@ -1,10 +1,4 @@
-﻿using PulsarModLoader;
-using PulsarModLoader.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using PulsarModLoader.Utilities;
 using UnityEngine;
 using static UnityEngine.GUILayout;
 
@@ -12,6 +6,7 @@ namespace HandheldScannerImprovements
 {
     internal class GUI : PulsarModLoader.CustomGUI.ModSettingsMenu
     {
+        string cachedUIZoomLevel;
         string cachedHostilehex;
         string cachedCrewhex;
         string cachedNPChex;
@@ -33,6 +28,17 @@ namespace HandheldScannerImprovements
             {
                 Global.HSIScannerFireDisplay.Value = !Global.HSIScannerFireDisplay.Value;
             }
+
+            BeginHorizontal();
+            Label("UI Scanner Zoom Level:");
+            cachedUIZoomLevel = TextField($"{Global.HSIUIZoomLevel.Value}");
+            if(int.TryParse(cachedUIZoomLevel, out int zoomLevel))
+            {
+                Global.HSIUIZoomLevel.Value = zoomLevel;
+            }
+            EndHorizontal();
+
+
             BeginHorizontal();
             Label("HostileHex");
             cachedHostilehex = TextField(cachedHostilehex);

@@ -1,6 +1,8 @@
 # HandheldScannerImprovements
 Combining improvements from various mods, this mod intends to provide a slew of customization and new features.
 
+![Scanner](https://user-images.githubusercontent.com/46509577/233862796-93ce3bb1-1282-41ae-8975-c8f5bf269069.PNG)
+
 ## Features:  
 - Adds fire detection to the scanner  
 - Scanner levels effect the scanner range  
@@ -20,7 +22,8 @@ Combining improvements from various mods, this mod intends to provide a slew of 
  - npc  
  - teleporter  
  - door  
- - items  
+ - items
+
  - research
 #### Others: 
  - colorblind   - Set colors to a colorblind friendly preset  

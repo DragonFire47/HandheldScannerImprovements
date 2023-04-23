@@ -23,7 +23,6 @@ Combining improvements from various mods, this mod intends to provide a slew of 
  - teleporter  
  - door  
  - items
-
  - research
 #### Others: 
  - colorblind   - Set colors to a colorblind friendly preset  
